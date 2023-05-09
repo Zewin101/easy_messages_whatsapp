@@ -1,9 +1,9 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:whatsappservices/provider/provider_whatsapp.dart';
-import 'package:whatsappservices/screens/setting/addMassage.dart';
-import 'package:whatsappservices/shared/widget/widgets_CardDetails.dart';
+import 'package:easy_whats/provider/provider_whatsapp.dart';
+import 'package:easy_whats/screens/setting/addMassage.dart';
+import 'package:easy_whats/shared/widget/widgets_CardDetails.dart';
 
-import 'package:whatsappservices/styles/colors.dart';
+import 'package:easy_whats/styles/colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 

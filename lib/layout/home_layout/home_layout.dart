@@ -1,4 +1,4 @@
-import 'package:whatsappservices/styles/colors.dart';
+import 'package:easy_whats/styles/colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';

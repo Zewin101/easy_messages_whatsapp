@@ -1,4 +1,4 @@
-# whatsappservices
+# easy_whats
 
 A new Flutter project.
 

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:whatsappservices/generated/assets.dart';
+import 'package:easy_whats/generated/assets.dart';
 import 'package:flutter/material.dart';
 import '../layout/home_layout/home_layout.dart';
 

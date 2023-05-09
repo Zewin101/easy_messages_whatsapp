@@ -1,9 +1,9 @@
-import 'package:whatsappservices/provider/provider_massage.dart';
-import 'package:whatsappservices/provider/provider_whatsapp.dart';
-import 'package:whatsappservices/screens/setting/addMassage.dart';
-import 'package:whatsappservices/screens/setting/setting_view.dart';
+import 'package:easy_whats/provider/provider_massage.dart';
+import 'package:easy_whats/provider/provider_whatsapp.dart';
+import 'package:easy_whats/screens/setting/addMassage.dart';
+import 'package:easy_whats/screens/setting/setting_view.dart';
 
-import 'package:whatsappservices/styles/myTheme.dart';
+import 'package:easy_whats/styles/myTheme.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

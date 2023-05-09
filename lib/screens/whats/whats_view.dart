@@ -1,5 +1,5 @@
-import 'package:whatsappservices/provider/provider_massage.dart';
-import 'package:whatsappservices/provider/provider_whatsapp.dart';
+import 'package:easy_whats/provider/provider_massage.dart';
+import 'package:easy_whats/provider/provider_whatsapp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

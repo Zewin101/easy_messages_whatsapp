@@ -1,6 +1,6 @@
 {
-    "name": "whatsappservices",
-    "short_name": "whatsappservices",
+    "name": "easy_whats",
+    "short_name": "easy_whats",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
