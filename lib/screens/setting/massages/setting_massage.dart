@@ -1,19 +1,15 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_whats/provider/provider_whatsapp.dart';
-import 'package:easy_whats/screens/setting/addMassage.dart';
-import 'package:easy_whats/shared/widget/widgets_CardDetails.dart';
-
+import 'package:easy_whats/screens/setting/massages/addMassage.dart';
+import 'package:easy_whats/shared/componant/widgets_CardDetails.dart';
 import 'package:easy_whats/styles/colors.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
+import '../../../provider/provider_massage.dart';
 
-import '../../provider/provider_massage.dart';
-
-class Setting_Screen extends StatelessWidget {
-  Setting_Screen({Key? key}) : super(key: key);
-  static const String routeName = "setting";
+class Massage_Setting extends StatelessWidget {
+  Massage_Setting({Key? key}) : super(key: key);
+  static const String routeName = "Massage_Setting";
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +26,29 @@ class Setting_Screen extends StatelessWidget {
         },
       ),
       body: provider.allMassage.isEmpty
-          ? const Center(child: Text("لا يوجد رسائل محفوظة "))
+          ? Container(
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "لا يوجد رسائل محفوظة ",
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
+                  Icon(Icons.sledding)
+                ],
+              ),
+            )
           : ListView.builder(
               itemCount: provider.allMassage.length,
               itemBuilder: (context, index) {
                 return CardDetails(
+                  DELETE: (context) => provider.deleteRowInDatabase(
+                      id: provider.allMassage[index]['id']),
+                  EDIT: (context) => provider.updateDatabase(
+                      title: 'title',
+                      massage: 'massage',
+                      id: provider.allMassage[index]['id']),
                   massage: provider.allMassage[index]['massage'],
                   title: provider.allMassage[index]['title'],
                   onTap: () {
@@ -46,8 +60,10 @@ class Setting_Screen extends StatelessWidget {
                       desc:
                           'لارسال الرسالة الي رقم اضغط ارسال لجعل الرسالة الرسالة الرئيسية اضغط الرئيسية',
                       btnCancelOnPress: () {
-                        provider.massageMaster[0]['title'] = provider.allMassage[index]['title'];
-                        provider.massageMaster[0]['massage'] = provider.allMassage[index]['massage'];
+                        provider.massageMaster[0]['title'] =
+                            provider.allMassage[index]['title'];
+                        provider.massageMaster[0]['massage'] =
+                            provider.allMassage[index]['massage'];
                       },
                       btnOkOnPress: () async {
                         showDialog(

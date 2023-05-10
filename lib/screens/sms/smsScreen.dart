@@ -1,23 +1,21 @@
-import 'package:easy_whats/provider/provider_massage.dart';
-import 'package:easy_whats/provider/provider_setting.dart';
-import 'package:easy_whats/provider/provider_whatsapp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
+import '../../provider/provider_massage.dart';
+import '../../provider/provider_whatsapp.dart';
 import '../../styles/colors.dart';
 
-class WhatsappScreen extends StatelessWidget {
-  static const String routeName = "home";
-
+class sms_screen extends StatelessWidget {
+   sms_screen({Key? key}) : super(key: key);
+static const String routeName='sms_screen';
   var numberController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   var controller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<WhatsappProvider>(context);
     var providerMassage = Provider.of<MyProvider>(context);
-    var setting = Provider.of<SettingProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Form(
@@ -46,8 +44,8 @@ class WhatsappScreen extends StatelessWidget {
                     prefixIcon: Icon(Icons.phone),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide:  BorderSide(
-                        color: setting.colorSystem[0],
+                      borderSide: const BorderSide(
+                        color: MASTERCOLOR,
                         width: 2,
                       ),
                     ),
@@ -60,6 +58,7 @@ class WhatsappScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Container(
@@ -70,24 +69,25 @@ class WhatsappScreen extends StatelessWidget {
                           backgroundColor: MASTERCOLOR, // foreground
                         ),
                         onPressed: () async {
-                          await provider.launchUrlWhatsapp(
+                          await provider.launchUrlSms(
                               numPhone: numberController.text,
-                              messageWhats: providerMassage.massageMaster[0]
-                                  ['massage']);
+                              messageSms: providerMassage.massageMaster[0]
+                              ['massage']);
                         },
-                        child:  Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text(
-                              "Whatsapp",
+                            const Text(
+                              "SMS",
                               style: TextStyle(
                                   fontSize: 30, fontWeight: FontWeight.bold),
                             ),
-                            Icon(Icons.whatsapp,size: 35),
+                            Icon(Icons.sms,size: 35),
                           ],
                         )),
                   ),
                 ),
+
 
 
               ],

@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 const Color MASTERCOLOR = Color.fromRGBO(60, 51, 115, 1.0);
+const Color MASTERCOLORTOW = Color.fromRGBO(53, 152, 219, 1.0);
+const Color MASTERCOLORTHREE = Color.fromRGBO(3, 150, 115, 1.0);
 const Color CATCOLOR1 = Color.fromRGBO(106, 68, 129, 1.0);
 const Color CATCOLOR2 = Color.fromRGBO(58, 119, 15, 1.0);
 const Color CATCOLOR3 = Color.fromRGBO(105, 166, 150, 1.0);

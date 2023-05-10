@@ -6,7 +6,7 @@ class MyThemeData {
   static ThemeData lightTheme = ThemeData(
       appBarTheme: const AppBarTheme(
         centerTitle: true,
-        color: MASTERCOLOR,
+
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(15),
@@ -14,12 +14,12 @@ class MyThemeData {
         ),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: MASTERCOLOR,
+
       ),
       textTheme: const TextTheme(
         headline1: TextStyle(
           color: Colors.white,
-          fontSize: 25,
+          fontSize: 20,
           fontWeight: FontWeight.bold,
         ),
         headline2: TextStyle(
@@ -40,6 +40,7 @@ class MyThemeData {
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: MASTERCOLOR,
+          type:BottomNavigationBarType.fixed ,
           selectedItemColor: Colors.cyanAccent,
           unselectedItemColor: Colors.white));
 

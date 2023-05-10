@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../provider/provider_massage.dart';
+import '../../../provider/provider_massage.dart';
 
-import '../../styles/colors.dart';
+import '../../../styles/colors.dart';
 
 class AddMassage_Screen extends StatefulWidget {
   AddMassage_Screen({Key? key}) : super(key: key);

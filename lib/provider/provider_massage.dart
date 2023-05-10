@@ -1,29 +1,36 @@
+import 'package:easy_whats/screens/email/emailScreen.dart';
+import 'package:easy_whats/screens/sms/smsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../screens/setting/setting_view.dart';
+import '../screens/setting/massages/setting_massage.dart';
+import '../screens/setting/setting.dart';
 import '../screens/whats/whats_view.dart';
 import '../shared/constants/constants.dart';
 
 class MyProvider extends ChangeNotifier {
-
   List<Map> allMassage = [];
-  late int massageIndex=0;
-  List<Map> massageMaster = [{'title': 'الرئيسية', 'massage': 'السلام عليكم ورحمة الله وبركاتة'}];
-  void changeMassage(int index){
-    massageIndex=index;
+  late int massageIndex = 0;
+  List<Map> massageMaster = [
+    {'title': 'الرئيسية', 'massage': 'السلام عليكم ورحمة الله وبركاتة'}
+  ];
+
+  void changeMassage(int index) {
+    massageIndex = index;
     notifyListeners();
   }
 
-
-
   List<Widget> screen = [
     WhatsappScreen(),
+    sms_screen(),
+    email_screen(),
     Setting_Screen(),
   ];
   List<String> title = [
-    'Whats App Services',
-    'Whats App Services 2',
+    'Whatsapp Services',
+    'SMS Services',
+    'Email Services ',
+    'Setting ',
   ];
 
   int currentIndex = 0;
@@ -32,6 +39,8 @@ class MyProvider extends ChangeNotifier {
     currentIndex = index;
     notifyListeners();
   }
+
+
   Database? database;
   createDatabase() {
     openDatabase(
@@ -51,7 +60,6 @@ class MyProvider extends ChangeNotifier {
     });
     notifyListeners();
   }
-
   insertDatabase({required String title, required String massage}) async {
     await database?.transaction((txn) {
       return txn
@@ -65,8 +73,27 @@ class MyProvider extends ChangeNotifier {
       });
     });
   }
-
-  void readDatabase(database) {
+  updateDatabase({required String title, required String massage,required int id}) async {
+    await database?.rawUpdate(
+        'UPDATE $tableName SET title = ?, massage = ? WHERE id = ?',
+        ['updated name', '9876', '$id']).then((value) {
+      print("$value update successfully");
+      readDatabase(database);
+    }).catchError((onError) {
+      print('error update ===== $onError');
+    });
+  }
+  deleteRowInDatabase({required int id}) async {
+    await database
+        ?.rawDelete('DELETE FROM $tableName WHERE id = $id')
+        .then((value) {
+      print("$value delete successfully");
+      readDatabase(database);
+    }).catchError((onError) {
+      print('error delete ===== $onError');
+    });
+  }
+  readDatabase(database) {
     database?.rawQuery('SELECT * FROM $tableName').then((value) {
       allMassage = value;
       print(allMassage);
