@@ -1,3 +1,4 @@
+import 'package:easy_whats/generated/assets.dart';
 import 'package:easy_whats/provider/provider_setting.dart';
 import 'package:easy_whats/styles/colors.dart';
 import 'package:flutter/material.dart';
@@ -15,41 +16,52 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<MyProvider>(context);
+    var provider = Provider.of<MessageProvider>(context);
     var setting = Provider.of<SettingProvider>(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          setting.icons[provider.currentIndex],
-        ],
-        title:  Text(provider.title[provider.currentIndex]),
-        backgroundColor:setting.colorSystem[setting.colorNumber] ,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-          onTap: (value) {
-            provider.changeCurrentIndex(value);
-          },
-          currentIndex: provider.currentIndex,
-          items:  [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.whatsapp),
-                label: 'واتس اب',
-                backgroundColor: setting.colorSystem[setting.colorNumber]),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.sms),
-                label: 'الرسائل',
-                backgroundColor: setting.colorSystem[setting.colorNumber]),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.attach_email),
-                label: 'الايميل',
-                backgroundColor:setting.colorSystem[setting.colorNumber]),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'المحفوظات',
-                backgroundColor: setting.colorSystem[setting.colorNumber]),
-          ]),
-      body: provider.screen[provider.currentIndex],
+    return Stack(
+      children: [
+       Image.asset(Assets.imageBack1),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            actions: [
+              setting.icons[provider.currentIndex],
+            ],
+            title:  Text(provider.title[provider.currentIndex]),
+            backgroundColor:setting.colorSystem[setting.colorNumber] ,
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+              onTap: (value) {
+                provider.changeCurrentIndex(value);
+              },
+              backgroundColor: setting.colorSystem[setting.colorNumber],
+              currentIndex: provider.currentIndex,
+              items:  [
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.whatsapp),
+                    label: 'واتس اب',
+                    backgroundColor: setting.colorSystem[setting.colorNumber]),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.sms),
+                    label: 'الرسائل',
+                    backgroundColor: setting.colorSystem[setting.colorNumber]),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.attach_email),
+                    label: 'الايميل',
+                    backgroundColor:setting.colorSystem[setting.colorNumber]),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.settings),
+                    label: 'المحفوظات',
+                    backgroundColor: setting.colorSystem[setting.colorNumber]),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.settings),
+                    label: 'الاعدادات',
+                    backgroundColor: setting.colorSystem[setting.colorNumber]),
+              ]),
+          body: provider.screen[provider.currentIndex],
+        ),
+      ],
     );
   }
 }

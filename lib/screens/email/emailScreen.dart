@@ -18,7 +18,7 @@ class email_screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<WhatsappProvider>(context);
-    var providerMassage = Provider.of<MyProvider>(context);
+    var providerMassage = Provider.of<MessageProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Form(
@@ -73,37 +73,37 @@ class email_screen extends StatelessWidget {
                       );
                     },
                     title: 'ارسال'),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
-                  child: Container(
-                    height: 40,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: MASTERCOLOR, // foreground
-                        ),
-                        onPressed: () async {
-                          await provider.launchUrlEmail(
-                            massage: providerMassage.massageMaster[0]
-                                ['massage'],
-                            title: providerMassage.massageMaster[0]['title'],
-                            email: '01200361136R@GMAIL.COM',
-                          );
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Text(
-                              "ارسال",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            Icon(Icons.send, size: 20),
-                          ],
-                        )),
-                  ),
-                ),
+                // Padding(
+                //   padding:
+                //       const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
+                //   child: Container(
+                //     height: 40,
+                //     child: ElevatedButton(
+                //         style: ElevatedButton.styleFrom(
+                //           foregroundColor: Colors.white,
+                //           backgroundColor: MASTERCOLOR, // foreground
+                //         ),
+                //         onPressed: () async {
+                //           await provider.launchUrlEmail(
+                //             massage: providerMassage.massageMaster[0]
+                //                 ['massage'],
+                //             title: providerMassage.massageMaster[0]['title'],
+                //             email: '01200361136R@GMAIL.COM',
+                //           );
+                //         },
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //           children: [
+                //             const Text(
+                //               "ارسال",
+                //               style: TextStyle(
+                //                   fontSize: 20, fontWeight: FontWeight.bold),
+                //             ),
+                //             Icon(Icons.send, size: 20),
+                //           ],
+                //         )),
+                //   ),
+                // ),
               ],
             ),
           ),

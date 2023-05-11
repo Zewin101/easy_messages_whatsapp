@@ -16,7 +16,7 @@ class WhatsappScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<WhatsappProvider>(context);
-    var providerMassage = Provider.of<MyProvider>(context);
+    var providerMassage = Provider.of<MessageProvider>(context);
     var setting = Provider.of<SettingProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -39,22 +39,23 @@ class WhatsappScreen extends StatelessWidget {
                   controller: numberController,
                   decoration: InputDecoration(
                     hintText: "                ادخل الرقم ",
+
                     hintStyle: const TextStyle(
-                        fontSize: 25,
+                        fontSize: 20,
                         fontWeight: FontWeight.w900,
-                        color: MASTERCOLOR),
+                        ),
                     prefixIcon: Icon(Icons.phone),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
                       borderSide:  BorderSide(
-                        color: setting.colorSystem[0],
+                        color: setting.colorSystem[setting.colorNumber],
                         width: 2,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(
-                        color: MASTERCOLOR,
+                      borderSide:  BorderSide(
+                        color: setting.colorSystem[setting.colorNumber],
                         width: 2,
                       ),
                     ),
@@ -67,7 +68,7 @@ class WhatsappScreen extends StatelessWidget {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
-                          backgroundColor: MASTERCOLOR, // foreground
+                          backgroundColor: setting.colorSystem[setting.colorNumber], // foreground
                         ),
                         onPressed: () async {
                           await provider.launchUrlWhatsapp(

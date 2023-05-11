@@ -2,13 +2,12 @@ import 'package:easy_whats/screens/email/emailScreen.dart';
 import 'package:easy_whats/screens/sms/smsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-
-import '../screens/setting/massages/setting_massage.dart';
+import '../screens/massages/message_setting.dart';
 import '../screens/setting/setting.dart';
 import '../screens/whats/whats_view.dart';
 import '../shared/constants/constants.dart';
 
-class MyProvider extends ChangeNotifier {
+class MessageProvider extends ChangeNotifier {
   List<Map> allMassage = [];
   late int massageIndex = 0;
   List<Map> massageMaster = [
@@ -24,12 +23,14 @@ class MyProvider extends ChangeNotifier {
     WhatsappScreen(),
     sms_screen(),
     email_screen(),
+    MessageScreen(),
     Setting_Screen(),
   ];
   List<String> title = [
     'Whatsapp Services',
     'SMS Services',
     'Email Services ',
+    'Message Setting ',
     'Setting ',
   ];
 

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../provider/provider_massage.dart';
 
 import '../../../styles/colors.dart';
+import '../../provider/provider_setting.dart';
 
 class AddMassage_Screen extends StatefulWidget {
   AddMassage_Screen({Key? key}) : super(key: key);
@@ -19,110 +20,88 @@ class _AddMassage_ScreenState extends State<AddMassage_Screen> {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<MyProvider>(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('رسالة جديدة'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+    var provider = Provider.of<MessageProvider>(context);
+    var setting = Provider.of<SettingProvider>(context);
+    var formkey=GlobalKey<FormState>();
+    return  Padding(
+        padding: const EdgeInsets.all(2.0),
         child: Form(
-          // key: cubit.formKey,
+          key: formkey,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Card(
-                  color: MASTERCOLOR,
-                  elevation: 20,
-                  shadowColor: MASTERCOLOR,
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      width: 200,
-                      height: 100,
-                      child: AutoSizeText(
-                        provider.allMassage.isEmpty
-                            ? 'السلام عليكم ورحمة الله وبركاتة'
-                            : provider.massageMaster[0]['massage'],
-                        textAlign: TextAlign.right,
-                        style: Theme.of(context).textTheme.headline1,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
                 TextFormField(
                   maxLength: 30,
                   textDirection: TextDirection.rtl,
                   controller: titleController,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 25,
+                    fontSize: 20,
                   ),
                   decoration: InputDecoration(
                     labelText: "         عنوان الرسالة",
+                    labelStyle: Theme.of(context).textTheme.subtitle1,
                     prefixIcon: Icon(Icons.text_snippet_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(
-                        color: MASTERCOLOR,
+                      borderSide:  BorderSide(
+                        color: setting.colorSystem[setting.colorNumber],
                         width: 2,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(
-                        color: MASTERCOLOR,
+                      borderSide:  BorderSide(
+                        color: setting.colorSystem[setting.colorNumber],
                         width: 2,
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 5,
                 ),
                 TextFormField(
                   maxLength: 1000,
                   textDirection: TextDirection.rtl,
+
                   controller: massageController,
-                  maxLines: 3,
+                  maxLines: 10,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 25,
+                    fontSize: 20,
                   ),
                   decoration: InputDecoration(
                     labelText: "          نص الرسالة",
                     prefixIcon: Icon(Icons.text_snippet_outlined),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(
-                        color: MASTERCOLOR,
+                      borderSide:  BorderSide(
+                        color: setting.colorSystem[setting.colorNumber],
                         width: 2,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(
-                        color: MASTERCOLOR,
+                      borderSide:  BorderSide(
+                        color: setting.colorSystem[setting.colorNumber],
                         width: 2,
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
                 ElevatedButton(
                     style:
-                        ElevatedButton.styleFrom(backgroundColor: MASTERCOLOR),
+                        ElevatedButton.styleFrom(backgroundColor: setting.colorSystem[setting.colorNumber]),
                     onPressed: () {
+
                       provider.insertDatabase(
                           title: titleController.text,
                           massage: massageController.text);
-
                       Navigator.pop(context);
                     },
                     child: Text(
@@ -133,7 +112,8 @@ class _AddMassage_ScreenState extends State<AddMassage_Screen> {
             ),
           ),
         ),
-      ),
     );
+
+
   }
 }

@@ -13,9 +13,7 @@ class MyThemeData {
           ),
         ),
       ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
 
-      ),
       textTheme: const TextTheme(
         headline1: TextStyle(
           color: Colors.white,
@@ -39,7 +37,7 @@ class MyThemeData {
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: MASTERCOLOR,
+
           type:BottomNavigationBarType.fixed ,
           selectedItemColor: Colors.cyanAccent,
           unselectedItemColor: Colors.white));

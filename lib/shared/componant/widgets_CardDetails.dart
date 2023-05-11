@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
 
+import '../../provider/provider_setting.dart';
 import '../../styles/colors.dart';
 
 class CardDetails extends StatelessWidget {
@@ -20,8 +22,9 @@ class CardDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var setting=Provider.of<SettingProvider>(context);
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.only(left: 5,right: 10,top: 5),
       child: Slidable(
         startActionPane: ActionPane(
           motion: ScrollMotion(),
@@ -45,7 +48,7 @@ class CardDetails extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           child: Card(
-            color: CATCOLOR9,
+            color: setting.colorSystem[setting.colorNumber],
             elevation: 20,
             shadowColor: MASTERCOLOR,
             child: Column(

@@ -23,7 +23,7 @@ class Widget_MyButton extends StatelessWidget {
       ),
       child: Container(
         width: double.infinity,
-        height: MediaQuery.of(context).size.height*0.08,
+        height: MediaQuery.of(context).size.height*0.06,
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: setting.colorSystem[setting.colorNumber],
@@ -32,8 +32,11 @@ class Widget_MyButton extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(Icons.arrow_back_ios,size: 20),
-                Text(title,style: Theme.of(context).textTheme.headline1,),
+                Expanded(child: Text(title,style: Theme.of(context).textTheme.headline1,textAlign: TextAlign.center,)),
+                Icon(Icons.send,size: 20),
+                SizedBox(width: 5,),
+
+
               ],
             )),
       ),

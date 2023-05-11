@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/provider_massage.dart';
+import '../../provider/provider_setting.dart';
 import '../../provider/provider_whatsapp.dart';
 import '../../styles/colors.dart';
 
@@ -15,7 +16,8 @@ static const String routeName='sms_screen';
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<WhatsappProvider>(context);
-    var providerMassage = Provider.of<MyProvider>(context);
+    var providerMassage = Provider.of<MessageProvider>(context);
+    var setting = Provider.of<SettingProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Form(
@@ -38,21 +40,21 @@ static const String routeName='sms_screen';
                   decoration: InputDecoration(
                     hintText: "                ادخل الرقم ",
                     hintStyle: const TextStyle(
-                        fontSize: 25,
+                        fontSize: 20,
                         fontWeight: FontWeight.w900,
-                        color: MASTERCOLOR),
+                        ),
                     prefixIcon: Icon(Icons.phone),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(
-                        color: MASTERCOLOR,
+                      borderSide:  BorderSide(
+                        color: setting.colorSystem[setting.colorNumber],
                         width: 2,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(
-                        color: MASTERCOLOR,
+                      borderSide:  BorderSide(
+                        color: setting.colorSystem[setting.colorNumber],
                         width: 2,
                       ),
                     ),
@@ -66,7 +68,7 @@ static const String routeName='sms_screen';
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
-                          backgroundColor: MASTERCOLOR, // foreground
+                          backgroundColor: setting.colorSystem[setting.colorNumber], // foreground
                         ),
                         onPressed: () async {
                           await provider.launchUrlSms(

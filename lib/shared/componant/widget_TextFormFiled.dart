@@ -42,15 +42,15 @@ class Widget_TextFormFiled extends StatelessWidget {
         prefixIcon: Icon(icon,color: setting.colorSystem[setting.colorNumber],),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide: const BorderSide(
-            color: MASTERCOLOR,
+          borderSide:  BorderSide(
+            color: setting.colorSystem[setting.colorNumber],
             width: 2,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(
-            color: MASTERCOLOR,
+          borderSide:  BorderSide(
+            color: setting.colorSystem[setting.colorNumber],
             width: 2,
           ),
         ),

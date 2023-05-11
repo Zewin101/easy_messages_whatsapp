@@ -1,28 +1,47 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_whats/provider/provider_whatsapp.dart';
-import 'package:easy_whats/screens/setting/massages/addMassage.dart';
+
 import 'package:easy_whats/shared/componant/widgets_CardDetails.dart';
 import 'package:easy_whats/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../provider/provider_massage.dart';
+import '../../provider/provider_setting.dart';
+import '../../shared/componant/widget_bottomSheet.dart';
+import 'addMassage.dart';
 
-class Massage_Setting extends StatelessWidget {
-  Massage_Setting({Key? key}) : super(key: key);
-  static const String routeName = "Massage_Setting";
+class MessageScreen extends StatelessWidget {
+  MessageScreen({Key? key}) : super(key: key);
+  static const String routeName = "MessageScreen";
 
   @override
   Widget build(BuildContext context) {
     var numberPhone = TextEditingController();
-    var provider = Provider.of<MyProvider>(context);
+    var provider = Provider.of<MessageProvider>(context);
     var sendMassage = Provider.of<WhatsappProvider>(context);
+    var setting = Provider.of<SettingProvider>(context);
     return Scaffold(
+      backgroundColor: Colors.transparent,
       floatingActionButton: FloatingActionButton(
+        backgroundColor: setting.colorSystem[setting.colorNumber],
         child: const Icon(
           Icons.add,
         ),
         onPressed: () {
-          Navigator.pushNamed(context, AddMassage_Screen.routeName);
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+
+
+                  content: AddMassage_Screen(),
+                  title: Text(
+                    'رسالة جديدة',
+                    style: Theme.of(context).textTheme.subtitle1,
+                    textAlign: TextAlign.center,
+                  ),
+                );
+              });
         },
       ),
       body: provider.allMassage.isEmpty
