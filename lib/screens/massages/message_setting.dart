@@ -65,21 +65,23 @@ class MessageScreen extends StatelessWidget {
                 return CardDetails(
                   DELETE: (context) => provider.deleteRowInDatabase(
                       id: provider.allMassage[index]['id']),
-                  EDIT: (context) => provider.updateDatabase(
-                      title: 'title',
-                      massage: 'massage',
-                      id: provider.allMassage[index]['id']),
+                  // EDIT: (context) => provider.updateDatabase(
+                  //     title: 'title',
+                  //     massage: 'massage',
+                  //     id: provider.allMassage[index]['id']),
                   massage: provider.allMassage[index]['massage'],
                   title: provider.allMassage[index]['title'],
+
                   onTap: () {
                     AwesomeDialog(
                       context: context,
                       title: 'تعليمات',
                       desc:
                           'لارسال الرسالة الي رقم اضغط ارسال لجعل الرسالة الرسالة الرئيسية اضغط الرئيسية',
-                      btnCancelOnPress: () {
-
-                   provider.changeMessageInAllApp(index);
+                      btnCancelOnPress: () async {
+                        await provider.changeMessageInAllApp(index);
+                        sharedPreferences.setInt('id', index);
+                        print(provider.messageApp);
                       },
                       btnOkOnPress: () async {
                         showDialog(

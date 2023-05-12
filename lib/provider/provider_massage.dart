@@ -14,22 +14,27 @@ class MessageProvider extends ChangeNotifier {
   late int massageIndex = 0;
   List<Map> massageMaster = [
     {
+
       'title': sharedPreferences.getString('MasterTitle') ?? ' الرئيسية',
       'massage': sharedPreferences.getString('MasterMessage') ??
           ' السلام عليكم ورحمة الله وبركات'
     }
   ];
-
+late int? id=sharedPreferences.getInt('id');
   String messageApp =
       "${sharedPreferences.getString('MasterTitle') ?? "رسالة"}\n "
-      "${sharedPreferences.getString('MasterMessage') ?? "السلام عليكم ورحمة الله وبركات"}";
+      "${sharedPreferences.getString('MasterMessage') ?? "السلام عليكم ورحمة الله وبركاته"}";
 
-  changeMessageInAllApp(int index) {
-    sharedPreferences.setString('MasterTitle', allMassage[index]['title']);
-    sharedPreferences.setString('MasterMessage', allMassage[index]['massage']);
+  changeMessageInAllApp(int index) async {
+     sharedPreferences.setString(
+        'MasterTitle', allMassage[index]['title']);
+     sharedPreferences.setString(
+        'MasterMessage', allMassage[index]['massage']);
     massageMaster[0]['title'] = allMassage[index]['title'];
     massageMaster[0]['massage'] = allMassage[index]['massage'];
     messageApp =
+
+        /// change message in all app
         '${allMassage[index]['title']}\n${allMassage[index]['massage']}';
     notifyListeners();
   }

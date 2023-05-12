@@ -18,7 +18,7 @@ class CardDetails extends StatelessWidget {
       required this.title,
       required this.onTap,
       required this.DELETE,
-      required this.EDIT});
+       this.EDIT});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class CardDetails extends StatelessWidget {
       margin: EdgeInsets.only(left: 5,right: 10,top: 5),
       child: Slidable(
         startActionPane: ActionPane(
-          motion: ScrollMotion(),
+          motion:ScrollMotion() ,
           children: [
             SlidableAction(
               onPressed: DELETE,
@@ -35,14 +35,15 @@ class CardDetails extends StatelessWidget {
               foregroundColor: Colors.white,
               icon: Icons.delete,
               label: 'DELETE',
+              borderRadius: BorderRadius.circular(8),
             ),
-            SlidableAction(
-              onPressed: EDIT,
-              backgroundColor: Color(0xFF21B7CA),
-              foregroundColor: Colors.white,
-              icon: Icons.edit_note_rounded,
-              label: 'EDIT',
-            ),
+            // SlidableAction(
+            //   onPressed: EDIT,
+            //   backgroundColor: Color(0xFF21B7CA),
+            //   foregroundColor: Colors.white,
+            //   icon: Icons.edit_note_rounded,
+            //   label: 'EDIT',
+            // ),
           ],
         ),
         child: InkWell(

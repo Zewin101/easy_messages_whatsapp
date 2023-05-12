@@ -14,6 +14,7 @@ class My_TextFormFiled extends StatelessWidget {
   final IconData? icon;
   final TextInputType? keyboardType;
   final bool TxtDecoration;
+  final bool enable;
 
   const My_TextFormFiled(
       {required this.length,
@@ -24,6 +25,7 @@ class My_TextFormFiled extends StatelessWidget {
       this.keyboardType,
       this.icon,
       this.maxLines,
+      this.enable=true,
       this.initialValue});
 
   @override
@@ -34,6 +36,7 @@ class My_TextFormFiled extends StatelessWidget {
       initialValue: initialValue,
       validator: validator,
       keyboardType: keyboardType,
+      enabled: enable,
       inputFormatters: [
         LengthLimitingTextInputFormatter(length),
       ],

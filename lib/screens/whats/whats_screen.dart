@@ -16,8 +16,8 @@ class WhatsappScreen extends StatelessWidget {
   var backMessageController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   var controller = TextEditingController();
-  var provider;
-  var providerMassage;
+  late WhatsappProvider provider;
+  late MessageProvider providerMassage;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class WhatsappScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 My_TextFormFiled(
-
+                  enable: false,
                     length: 500,
                     controller: backMessageController,
                     hintText: '',
@@ -80,6 +80,10 @@ class WhatsappScreen extends StatelessWidget {
       await provider.launchUrlWhatsapp(
           numPhone: numberController.text,
           messageWhats: providerMassage.massageMaster[0]['massage']);
+      providerMassage.updateDatabase(
+          title: providerMassage.allMassage[providerMassage.id!]['title'],
+          massage: providerMassage.allMassage[providerMassage.id!]['massage'],
+          id: providerMassage.id!);
     }
   }
 }
