@@ -6,11 +6,12 @@ import 'package:provider/provider.dart';
 import '../../provider/provider_setting.dart';
 import '../../styles/colors.dart';
 
-class Widget_MyButton extends StatelessWidget {
+class My_ElevatedButton extends StatelessWidget {
   void Function() onPressed;
   String title;
+  IconData? icon;
 
-  Widget_MyButton({required this.onPressed, required this.title});
+  My_ElevatedButton({required this.onPressed, required this.title,required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +34,8 @@ class Widget_MyButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(child: Text(title,style: Theme.of(context).textTheme.headline1,textAlign: TextAlign.center,)),
-                Icon(Icons.send,size: 20),
+                Icon(icon,size: 20),
                 SizedBox(width: 5,),
-
-
               ],
             )),
       ),

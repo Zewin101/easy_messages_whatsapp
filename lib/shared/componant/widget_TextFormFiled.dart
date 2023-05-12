@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../provider/provider_setting.dart';
 import '../../styles/colors.dart';
 
-class Widget_TextFormFiled extends StatelessWidget {
+class My_TextFormFiled extends StatelessWidget {
   final int length;
   final TextEditingController controller;
   final String hintText;
@@ -13,12 +13,14 @@ class Widget_TextFormFiled extends StatelessWidget {
   final String? initialValue;
   final IconData? icon;
   final TextInputType? keyboardType;
+  final bool TxtDecoration;
 
-  const Widget_TextFormFiled(
+  const My_TextFormFiled(
       {required this.length,
       required this.controller,
       required this.hintText,
-      required this.validator,
+      this.TxtDecoration = true,
+      this.validator,
       this.keyboardType,
       this.icon,
       this.maxLines,
@@ -36,20 +38,26 @@ class Widget_TextFormFiled extends StatelessWidget {
         LengthLimitingTextInputFormatter(length),
       ],
       controller: controller,
+      textDirection: TxtDecoration ? TextDirection.rtl : TextDirection.ltr,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(color: MASTERCOLOR2),
-        prefixIcon: Icon(icon,color: setting.colorSystem[setting.colorNumber],),
+        hintStyle: TextStyle(
+          color: MASTERCOLOR2,
+        ),
+        prefixIcon: Icon(
+          icon,
+          color: setting.colorSystem[setting.colorNumber],
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
-          borderSide:  BorderSide(
+          borderSide: BorderSide(
             color: setting.colorSystem[setting.colorNumber],
             width: 2,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide:  BorderSide(
+          borderSide: BorderSide(
             color: setting.colorSystem[setting.colorNumber],
             width: 2,
           ),

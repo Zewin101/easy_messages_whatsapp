@@ -4,7 +4,7 @@ import 'package:easy_whats/provider/provider_whatsapp.dart';
 import 'package:easy_whats/screens/email/emailScreen.dart';
 import 'package:easy_whats/screens/massages/addMassage.dart';
 import 'package:easy_whats/screens/massages/message_setting.dart';
-import 'package:easy_whats/screens/setting/setting.dart';
+
 import 'package:easy_whats/screens/sms/smsScreen.dart';
 
 import 'package:easy_whats/styles/myTheme.dart';
@@ -31,7 +31,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var setting = Provider.of<SettingProvider>(context);
+
 
 
     return MaterialApp(
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         MessageScreen.routeName: (context) => MessageScreen(),
         email_screen.routeName: (context) => email_screen(),
         sms_screen.routeName: (context) => sms_screen(),
-        Setting_Screen.routeName: (context) => Setting_Screen(),
+
 
       },
       theme: MyThemeData.lightTheme,

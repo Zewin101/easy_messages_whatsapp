@@ -1,30 +1,29 @@
+import 'package:easy_whats/main.dart';
+import 'package:easy_whats/provider/provider_massage.dart';
+import 'package:easy_whats/provider/provider_setting.dart';
+import 'package:easy_whats/provider/provider_whatsapp.dart';
 import 'package:easy_whats/shared/componant/widget_ElevatedButton.dart';
 import 'package:easy_whats/shared/componant/widget_TextFormFiled.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
-import '../../provider/provider_massage.dart';
-import '../../provider/provider_setting.dart';
-import '../../provider/provider_whatsapp.dart';
 import '../../styles/colors.dart';
 
-class sms_screen extends StatelessWidget {
-  sms_screen({Key? key}) : super(key: key);
-  static const String routeName = 'sms_screen';
+class WhatsappScreen extends StatelessWidget {
+  static const String routeName = "home";
+
   var numberController = TextEditingController();
   var backMessageController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   var controller = TextEditingController();
-  var providerMassage;
   var provider;
-  var setting;
+  var providerMassage;
 
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<WhatsappProvider>(context);
     providerMassage = Provider.of<MessageProvider>(context);
-    setting = Provider.of<SettingProvider>(context);
+    var setting = Provider.of<SettingProvider>(context);
     backMessageController.text = providerMassage.messageApp;
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -37,6 +36,7 @@ class sms_screen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 My_TextFormFiled(
+
                     length: 500,
                     controller: backMessageController,
                     hintText: '',
@@ -47,9 +47,9 @@ class sms_screen extends StatelessWidget {
                 My_TextFormFiled(
                   TxtDecoration: false,
                   length: 13,
-                  icon: Icons.phone_in_talk_outlined,
                   controller: numberController,
                   hintText: 'ادخل الرقم',
+                  icon: Icons.phone_in_talk_outlined,
                   validator: (value) {
                     if (value?.trim() == '' || value!.isEmpty) {
                       return 'لم تقم بكتابة الرقم ';
@@ -63,10 +63,10 @@ class sms_screen extends StatelessWidget {
                 ),
                 My_ElevatedButton(
                     onPressed: () async {
-                      await sendMessage();
+                      sendWhatsapp();
                     },
-                    title: "SMS",
-                    icon: Icons.sms),
+                    title: 'Whatsapp',
+                    icon: Icons.whatsapp),
               ],
             ),
           ),
@@ -75,11 +75,11 @@ class sms_screen extends StatelessWidget {
     );
   }
 
-  sendMessage() async {
+  sendWhatsapp() async {
     if (formKey.currentState!.validate()) {
-      await provider.launchUrlSms(
+      await provider.launchUrlWhatsapp(
           numPhone: numberController.text,
-          messageSms: providerMassage.massageMaster[0]['massage']);
+          messageWhats: providerMassage.massageMaster[0]['massage']);
     }
   }
 }

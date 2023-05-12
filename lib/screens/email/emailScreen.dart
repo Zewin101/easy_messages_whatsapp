@@ -1,4 +1,4 @@
-import 'package:easy_whats/shared/componant/widget_Bottome.dart';
+import 'package:easy_whats/shared/componant/widget_ElevatedButton.dart';
 import 'package:easy_whats/shared/componant/widget_TextFormFiled.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,12 +13,18 @@ class email_screen extends StatelessWidget {
   static const String routeName = 'email_screen';
   var numberController = TextEditingController();
   var formKey = GlobalKey<FormState>();
-  var controller = TextEditingController();
+  var emailController = TextEditingController();
+  var subjectController = TextEditingController();
+  var txtEmailController = TextEditingController();
+  var provider;
+  var providerMassage;
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<WhatsappProvider>(context);
-    var providerMassage = Provider.of<MessageProvider>(context);
+    provider = Provider.of<WhatsappProvider>(context);
+    providerMassage = Provider.of<MessageProvider>(context);
+    subjectController.text = providerMassage.massageMaster[0]['title'];
+    txtEmailController.text = providerMassage.massageMaster[0]['massage'];
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Form(
@@ -32,83 +38,83 @@ class email_screen extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Widget_TextFormFiled(
+                My_TextFormFiled(
+                  TxtDecoration: false,
                   icon: Icons.email,
                   keyboardType: TextInputType.emailAddress,
                   length: 50,
-                  controller: controller,
+                  controller: emailController,
                   hintText: 'ادخل الايميل',
-                  validator: (value) {},
+                  validator: (value) {
+                    if (value?.trim() == '' || value!.isEmpty) {
+                      return 'لم تقم بكتابة الرقم ';
+                    }
+                    if (numberController.text.length < 10) {
+                      final bool emailValid = RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                          .hasMatch(value);
+                      if (!emailValid) {
+                        return 'تأكد من كتابة الايميل بطريقة صحيحة';
+                      }
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                Widget_TextFormFiled(
+                My_TextFormFiled(
                   length: 20,
                   icon: Icons.title,
-                  controller: controller,
+                  controller: subjectController,
                   hintText: 'عنوان الرسالة     ',
-                  validator: (value) {},
+                  validator: (value) {
+                    if (value?.trim() == '' || value!.isEmpty) {
+                      return 'لم تقم بكتابة عنوان الرسالة ';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                Widget_TextFormFiled(
+                My_TextFormFiled(
                   icon: Icons.text_snippet_rounded,
                   maxLines: 8,
                   length: 50,
-                  controller: controller,
+                  controller: txtEmailController,
                   hintText: 'نص الرسالة',
-                  validator: (value) {},
+                  validator: (value) {
+                    if (value?.trim() == '' || value!.isEmpty) {
+                      return 'لم تقم بكتابة نص الرسالة ';
+                    }
+
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                Widget_MyButton(
+                My_ElevatedButton(
+                    icon: Icons.send,
                     onPressed: () async {
-                      await provider.launchUrlEmail(
-                        massage: providerMassage.massageMaster[0]['massage'],
-                        title: providerMassage.massageMaster[0]['title'],
-                        email: '01200361136R@GMAIL.COM',
-                      );
+                      await sendEmail();
                     },
-                    title: 'ارسال'),
-                // Padding(
-                //   padding:
-                //       const EdgeInsets.symmetric(vertical: 8, horizontal: 40),
-                //   child: Container(
-                //     height: 40,
-                //     child: ElevatedButton(
-                //         style: ElevatedButton.styleFrom(
-                //           foregroundColor: Colors.white,
-                //           backgroundColor: MASTERCOLOR, // foreground
-                //         ),
-                //         onPressed: () async {
-                //           await provider.launchUrlEmail(
-                //             massage: providerMassage.massageMaster[0]
-                //                 ['massage'],
-                //             title: providerMassage.massageMaster[0]['title'],
-                //             email: '01200361136R@GMAIL.COM',
-                //           );
-                //         },
-                //         child: Row(
-                //           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //           children: [
-                //             const Text(
-                //               "ارسال",
-                //               style: TextStyle(
-                //                   fontSize: 20, fontWeight: FontWeight.bold),
-                //             ),
-                //             Icon(Icons.send, size: 20),
-                //           ],
-                //         )),
-                //   ),
-                // ),
+                    title: 'Send'),
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+   sendEmail() async {
+    if (formKey.currentState!.validate()) {
+      await provider.launchUrlEmail(
+          massage: txtEmailController.text,
+          title: subjectController.text,
+          email: emailController.text);
+    }
   }
 }

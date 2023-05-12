@@ -1,5 +1,8 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:easy_whats/main.dart';
 import 'package:easy_whats/provider/provider_whatsapp.dart';
+import 'package:easy_whats/shared/componant/widget_ElevatedButton.dart';
+import 'package:easy_whats/shared/componant/widget_TextFormFiled.dart';
 
 import 'package:easy_whats/shared/componant/widgets_CardDetails.dart';
 import 'package:easy_whats/styles/colors.dart';
@@ -32,8 +35,6 @@ class MessageScreen extends StatelessWidget {
               context: context,
               builder: (context) {
                 return AlertDialog(
-
-
                   content: AddMassage_Screen(),
                   title: Text(
                     'رسالة جديدة',
@@ -73,16 +74,12 @@ class MessageScreen extends StatelessWidget {
                   onTap: () {
                     AwesomeDialog(
                       context: context,
-                      dialogType: DialogType.info,
-                      animType: AnimType.rightSlide,
                       title: 'تعليمات',
                       desc:
                           'لارسال الرسالة الي رقم اضغط ارسال لجعل الرسالة الرسالة الرئيسية اضغط الرئيسية',
                       btnCancelOnPress: () {
-                        provider.massageMaster[0]['title'] =
-                            provider.allMassage[index]['title'];
-                        provider.massageMaster[0]['massage'] =
-                            provider.allMassage[index]['massage'];
+
+                   provider.changeMessageInAllApp(index);
                       },
                       btnOkOnPress: () async {
                         showDialog(
@@ -94,33 +91,22 @@ class MessageScreen extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.subtitle1,
                               ),
-                              content: TextFormField(
-                                controller: numberPhone,
-                                decoration: InputDecoration(
-                                  hintText: 'رقم الجوال',
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide(color: MASTERCOLOR),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                    borderSide: BorderSide(color: MASTERCOLOR),
-                                  ),
-                                ),
-                              ),
+                              content: My_TextFormFiled(
+                                  length: 13,
+                                  controller: numberPhone,
+                                  hintText: 'رقم الجوال'),
                               actions: [
                                 SizedBox(
                                   width: double.infinity,
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor: MASTERCOLOR),
+                                  child: My_ElevatedButton(
                                       onPressed: () async {
                                         await sendMassage.launchUrlWhatsapp(
                                             numPhone: numberPhone.text,
                                             messageWhats: provider
                                                 .allMassage[index]['massage']);
                                       },
-                                      child: Text('go')),
+                                      title: 'send',
+                                      icon: Icons.send),
                                 )
                               ],
                             );
@@ -139,3 +125,7 @@ class MessageScreen extends StatelessWidget {
 }
 
 /// https://wsend.co/558568986
+// provider.massageMaster[0]['title'] =
+// provider.allMassage[index]['title'];
+// provider.massageMaster[0]['massage'] =
+// provider.allMassage[index]['massage'];

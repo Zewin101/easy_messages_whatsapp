@@ -2,17 +2,37 @@ import 'package:easy_whats/screens/email/emailScreen.dart';
 import 'package:easy_whats/screens/sms/smsScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
+import '../main.dart';
 import '../screens/massages/message_setting.dart';
-import '../screens/setting/setting.dart';
-import '../screens/whats/whats_view.dart';
+
+import '../screens/whats/whats_screen.dart';
 import '../shared/constants/constants.dart';
 
 class MessageProvider extends ChangeNotifier {
   List<Map> allMassage = [];
+
   late int massageIndex = 0;
   List<Map> massageMaster = [
-    {'title': 'الرئيسية', 'massage': 'السلام عليكم ورحمة الله وبركاتة'}
+    {
+      'title': sharedPreferences.getString('MasterTitle') ?? ' الرئيسية',
+      'massage': sharedPreferences.getString('MasterMessage') ??
+          ' السلام عليكم ورحمة الله وبركات'
+    }
   ];
+
+  String messageApp =
+      "${sharedPreferences.getString('MasterTitle') ?? "رسالة"}\n "
+      "${sharedPreferences.getString('MasterMessage') ?? "السلام عليكم ورحمة الله وبركات"}";
+
+  changeMessageInAllApp(int index) {
+    sharedPreferences.setString('MasterTitle', allMassage[index]['title']);
+    sharedPreferences.setString('MasterMessage', allMassage[index]['massage']);
+    massageMaster[0]['title'] = allMassage[index]['title'];
+    massageMaster[0]['massage'] = allMassage[index]['massage'];
+    messageApp =
+        '${allMassage[index]['title']}\n${allMassage[index]['massage']}';
+    notifyListeners();
+  }
 
   void changeMassage(int index) {
     massageIndex = index;
@@ -24,14 +44,12 @@ class MessageProvider extends ChangeNotifier {
     sms_screen(),
     email_screen(),
     MessageScreen(),
-    Setting_Screen(),
   ];
   List<String> title = [
     'Whatsapp Services',
     'SMS Services',
     'Email Services ',
     'Message Setting ',
-    'Setting ',
   ];
 
   int currentIndex = 0;
@@ -41,8 +59,8 @@ class MessageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   Database? database;
+
   createDatabase() {
     openDatabase(
       'whatsapp.db',
@@ -61,6 +79,7 @@ class MessageProvider extends ChangeNotifier {
     });
     notifyListeners();
   }
+
   insertDatabase({required String title, required String massage}) async {
     await database?.transaction((txn) {
       return txn
@@ -74,7 +93,9 @@ class MessageProvider extends ChangeNotifier {
       });
     });
   }
-  updateDatabase({required String title, required String massage,required int id}) async {
+
+  updateDatabase(
+      {required String title, required String massage, required int id}) async {
     await database?.rawUpdate(
         'UPDATE $tableName SET title = ?, massage = ? WHERE id = ?',
         ['updated name', '9876', '$id']).then((value) {
@@ -84,6 +105,7 @@ class MessageProvider extends ChangeNotifier {
       print('error update ===== $onError');
     });
   }
+
   deleteRowInDatabase({required int id}) async {
     await database
         ?.rawDelete('DELETE FROM $tableName WHERE id = $id')
@@ -94,6 +116,7 @@ class MessageProvider extends ChangeNotifier {
       print('error delete ===== $onError');
     });
   }
+
   readDatabase(database) {
     database?.rawQuery('SELECT * FROM $tableName').then((value) {
       allMassage = value;

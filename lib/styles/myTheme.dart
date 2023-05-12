@@ -18,7 +18,7 @@ class MyThemeData {
         headline1: TextStyle(
           color: Colors.white,
           fontSize: 20,
-          fontWeight: FontWeight.bold,
+       
         ),
         headline2: TextStyle(
           color: Colors.white,
