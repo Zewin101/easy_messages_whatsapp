@@ -111,7 +111,7 @@ class _UpdateMassage_ScreenState extends State<UpdateMassage_Screen> {
                     providerMessage.updateDatabase(
                         title: titleController.text,
                         massage: massageController.text,
-                        id: widget.index);
+                        id: providerMessage.allMassage[widget.index]['id']);
                     Navigator.pop(context);
                   }
 

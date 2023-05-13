@@ -67,7 +67,9 @@ class MessageScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 return CardDetails(
                   DELETE: (context) async {
+
                     await deleteData(index);
+                    await providerMessage.chackAllMassage(index);
                   },
                   EDIT: (context) async {
                     await updateData(index, context);
@@ -82,6 +84,8 @@ class MessageScreen extends StatelessWidget {
                           'لارسال الرسالة الي رقم اضغط ارسال لجعل الرسالة الرسالة الرئيسية اضغط الرئيسية',
                       btnCancelOnPress: () async {
                         await providerMessage.changeMessageInAllApp(index);
+                        providerMessage.id=index;
+                        print('index------.$index');
                         sharedPreferences.setInt('id', index);
                         print(providerMessage.messageApp);
                       },
@@ -129,9 +133,9 @@ class MessageScreen extends StatelessWidget {
 
   updateData(index, BuildContext context) {
     showModalBottomSheet(
-
       context: context,
       builder: (context) {
+        print('ddddddddddddddddddddddddddd-------------->$index');
        return  Padding(
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -147,6 +151,7 @@ class MessageScreen extends StatelessWidget {
   deleteData(int index) {
     providerMessage.deleteRowInDatabase(
         id: providerMessage.allMassage[index]['id']);
+    print(index);
   }
 }
 

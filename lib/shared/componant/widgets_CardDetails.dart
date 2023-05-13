@@ -51,9 +51,9 @@ class CardDetails extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           child: Card(
-            color: setting.colorSystem[setting.colorNumber],
-            elevation: 20,
-            shadowColor: MASTERCOLOR,
+            color: setting.cardColor[setting.colorNumber],
+            elevation: 40,
+            shadowColor: setting.cardColor[setting.colorNumber],
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -68,7 +68,7 @@ class CardDetails extends StatelessWidget {
                   child: Text(
                     massage,
                     textAlign: TextAlign.right,
-                    style: Theme.of(context).textTheme.subtitle1,
+                    style: Theme.of(context).textTheme.headline2,
                   ),
                 ),
               ],

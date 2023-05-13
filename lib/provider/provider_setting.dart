@@ -10,6 +10,15 @@ class SettingProvider extends ChangeNotifier {
     MASTERCOLORTHREE,
   ];
 
+List<Color> cardColor=[
+  MASTERCARD1,
+  MASTERCARD2,
+  MASTERCARD3,
+];
+
+
+
+
 
   bool drawer1=sharedPreferences.getBool('drawer1')??false;
   bool drawer2=sharedPreferences.getBool('drawer2')??false;

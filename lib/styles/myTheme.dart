@@ -23,7 +23,7 @@ class MyThemeData {
         headline2: TextStyle(
           color: Colors.white,
           fontSize: 20,
-          fontWeight: FontWeight.bold,
+
         ),
         subtitle1: TextStyle(
           color: MASTERCOLOR,
@@ -39,7 +39,7 @@ class MyThemeData {
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
 
           type:BottomNavigationBarType.fixed ,
-          selectedItemColor: Colors.cyanAccent,
+          selectedItemColor: MASTERNAV,
           unselectedItemColor: Colors.white));
 
   static ThemeData darkTheme = ThemeData();

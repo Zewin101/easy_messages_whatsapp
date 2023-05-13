@@ -14,28 +14,39 @@ class MessageProvider extends ChangeNotifier {
   late int massageIndex = 0;
   List<Map> massageMaster = [
     {
-
       'title': sharedPreferences.getString('MasterTitle') ?? ' الرئيسية',
       'massage': sharedPreferences.getString('MasterMessage') ??
           ' السلام عليكم ورحمة الله وبركات'
     }
   ];
-late int? id=sharedPreferences.getInt('id');
+  late int? id = sharedPreferences.getInt('id');
+  String titleMessageApp =
+      "${sharedPreferences.getString('MasterTitle') ?? "رسالة"} ";
   String messageApp =
-      "${sharedPreferences.getString('MasterTitle') ?? "رسالة"}\n "
       "${sharedPreferences.getString('MasterMessage') ?? "السلام عليكم ورحمة الله وبركاته"}";
 
+  chackAllMassage(int index) async {
+    if (index==0) {
+      await sharedPreferences.remove('MasterTitle');
+      await sharedPreferences.remove('MasterMessage');
+      print('sharadPrf NULL => ${sharedPreferences.getString('MasterTitle')}');
+       titleMessageApp ="رسالة";
+       messageApp ="السلام عليكم ورحمة الله وبركاته" ;
+
+    }
+    notifyListeners();
+  }
+
   changeMessageInAllApp(int index) async {
-     sharedPreferences.setString(
-        'MasterTitle', allMassage[index]['title']);
-     sharedPreferences.setString(
-        'MasterMessage', allMassage[index]['massage']);
+    sharedPreferences.setString('MasterTitle', allMassage[index]['title']);
+    sharedPreferences.setString('MasterMessage', allMassage[index]['massage']);
     massageMaster[0]['title'] = allMassage[index]['title'];
     massageMaster[0]['massage'] = allMassage[index]['massage'];
-    messageApp =
+    titleMessageApp =
 
         /// change message in all app
-        '${allMassage[index]['title']}\n${allMassage[index]['massage']}';
+        '${allMassage[index]['title']}';
+    messageApp = '${allMassage[index]['massage']}';
     notifyListeners();
   }
 
@@ -103,7 +114,7 @@ late int? id=sharedPreferences.getInt('id');
       {required String title, required String massage, required int id}) async {
     await database?.rawUpdate(
         'UPDATE $tableName SET title = ?, massage = ? WHERE id = ?',
-        [ title, massage , '$id']).then((value) {
+        [title, massage, '$id']).then((value) {
       print("$value update successfully");
       readDatabase(database);
     }).catchError((onError) {

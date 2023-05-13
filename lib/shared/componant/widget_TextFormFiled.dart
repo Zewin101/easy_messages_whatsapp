@@ -25,7 +25,7 @@ class My_TextFormFiled extends StatelessWidget {
       this.keyboardType,
       this.icon,
       this.maxLines,
-      this.enable=true,
+      this.enable = true,
       this.initialValue});
 
   @override
