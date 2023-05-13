@@ -31,7 +31,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
+var providerMassage=Provider.of<MessageProvider>(context);
 
 
     return MaterialApp(

@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:easy_whats/main.dart';
 import 'package:easy_whats/provider/provider_whatsapp.dart';
+import 'package:easy_whats/screens/massages/updateMassage.dart';
 import 'package:easy_whats/shared/componant/widget_ElevatedButton.dart';
 import 'package:easy_whats/shared/componant/widget_TextFormFiled.dart';
 
@@ -14,13 +15,16 @@ import '../../shared/componant/widget_bottomSheet.dart';
 import 'addMassage.dart';
 
 class MessageScreen extends StatelessWidget {
-  MessageScreen({Key? key}) : super(key: key);
   static const String routeName = "MessageScreen";
+  var numberPhone;
+  late MessageProvider providerMessage;
+  var sendMassage;
+  var setting;
 
   @override
   Widget build(BuildContext context) {
     var numberPhone = TextEditingController();
-    var provider = Provider.of<MessageProvider>(context);
+    providerMessage = Provider.of<MessageProvider>(context);
     var sendMassage = Provider.of<WhatsappProvider>(context);
     var setting = Provider.of<SettingProvider>(context);
     return Scaffold(
@@ -31,21 +35,19 @@ class MessageScreen extends StatelessWidget {
           Icons.add,
         ),
         onPressed: () {
-          showDialog(
+          showModalBottomSheet(
+            isScrollControlled: true,
               context: context,
               builder: (context) {
-                return AlertDialog(
-                  content: AddMassage_Screen(),
-                  title: Text(
-                    'رسالة جديدة',
-                    style: Theme.of(context).textTheme.subtitle1,
-                    textAlign: TextAlign.center,
-                  ),
+                return Padding(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: AddMassage_Screen(),
                 );
               });
         },
       ),
-      body: provider.allMassage.isEmpty
+      body: providerMessage.allMassage.isEmpty
           ? Container(
               width: double.infinity,
               child: Column(
@@ -60,18 +62,18 @@ class MessageScreen extends StatelessWidget {
               ),
             )
           : ListView.builder(
-              itemCount: provider.allMassage.length,
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              itemCount: providerMessage.allMassage.length,
               itemBuilder: (context, index) {
                 return CardDetails(
-                  DELETE: (context) => provider.deleteRowInDatabase(
-                      id: provider.allMassage[index]['id']),
-                  // EDIT: (context) => provider.updateDatabase(
-                  //     title: 'title',
-                  //     massage: 'massage',
-                  //     id: provider.allMassage[index]['id']),
-                  massage: provider.allMassage[index]['massage'],
-                  title: provider.allMassage[index]['title'],
-
+                  DELETE: (context) async {
+                    await deleteData(index);
+                  },
+                  EDIT: (context) async {
+                    await updateData(index, context);
+                  },
+                  massage: providerMessage.allMassage[index]['massage'],
+                  title: providerMessage.allMassage[index]['title'],
                   onTap: () {
                     AwesomeDialog(
                       context: context,
@@ -79,9 +81,9 @@ class MessageScreen extends StatelessWidget {
                       desc:
                           'لارسال الرسالة الي رقم اضغط ارسال لجعل الرسالة الرسالة الرئيسية اضغط الرئيسية',
                       btnCancelOnPress: () async {
-                        await provider.changeMessageInAllApp(index);
+                        await providerMessage.changeMessageInAllApp(index);
                         sharedPreferences.setInt('id', index);
-                        print(provider.messageApp);
+                        print(providerMessage.messageApp);
                       },
                       btnOkOnPress: () async {
                         showDialog(
@@ -89,7 +91,7 @@ class MessageScreen extends StatelessWidget {
                           builder: (context) {
                             return AlertDialog(
                               title: Text(
-                                'تريد ارسال رسالة \n${provider.allMassage[index]['title']}',
+                                'تريد ارسال رسالة \n${providerMessage.allMassage[index]['title']}',
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.subtitle1,
                               ),
@@ -104,7 +106,7 @@ class MessageScreen extends StatelessWidget {
                                       onPressed: () async {
                                         await sendMassage.launchUrlWhatsapp(
                                             numPhone: numberPhone.text,
-                                            messageWhats: provider
+                                            messageWhats: providerMessage
                                                 .allMassage[index]['massage']);
                                       },
                                       title: 'send',
@@ -123,6 +125,28 @@ class MessageScreen extends StatelessWidget {
               },
             ),
     );
+  }
+
+  updateData(index, BuildContext context) {
+    showModalBottomSheet(
+
+      context: context,
+      builder: (context) {
+       return  Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: UpdateMassage_Screen(
+            index: index,
+          ),
+        );
+      },
+      isScrollControlled: true,
+    );
+  }
+
+  deleteData(int index) {
+    providerMessage.deleteRowInDatabase(
+        id: providerMessage.allMassage[index]['id']);
   }
 }
 

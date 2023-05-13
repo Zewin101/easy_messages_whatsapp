@@ -119,6 +119,5 @@ flutter:
   assets:
     - assets/
     - assets/image/
-    - assets/image/2.0x/
-    - assets/image/3.0x/
+
 

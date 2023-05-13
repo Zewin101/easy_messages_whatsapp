@@ -37,13 +37,15 @@ class CardDetails extends StatelessWidget {
               label: 'DELETE',
               borderRadius: BorderRadius.circular(8),
             ),
-            // SlidableAction(
-            //   onPressed: EDIT,
-            //   backgroundColor: Color(0xFF21B7CA),
-            //   foregroundColor: Colors.white,
-            //   icon: Icons.edit_note_rounded,
-            //   label: 'EDIT',
-            // ),
+            SizedBox(width: 1,),
+            SlidableAction(
+              borderRadius: BorderRadius.circular(8),
+              onPressed: EDIT,
+              backgroundColor: Color(0xFF21B7CA),
+              foregroundColor: Colors.white,
+              icon: Icons.edit_note_rounded,
+              label: 'EDIT',
+            ),
           ],
         ),
         child: InkWell(

@@ -80,10 +80,7 @@ class WhatsappScreen extends StatelessWidget {
       await provider.launchUrlWhatsapp(
           numPhone: numberController.text,
           messageWhats: providerMassage.massageMaster[0]['massage']);
-      providerMassage.updateDatabase(
-          title: providerMassage.allMassage[providerMassage.id!]['title'],
-          massage: providerMassage.allMassage[providerMassage.id!]['massage'],
-          id: providerMassage.id!);
+
     }
   }
 }

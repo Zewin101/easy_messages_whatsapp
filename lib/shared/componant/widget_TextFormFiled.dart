@@ -32,6 +32,7 @@ class My_TextFormFiled extends StatelessWidget {
   Widget build(BuildContext context) {
     var setting = Provider.of<SettingProvider>(context);
     return TextFormField(
+      // autofocus: true,
       maxLines: maxLines,
       initialValue: initialValue,
       validator: validator,

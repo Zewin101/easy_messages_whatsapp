@@ -1,13 +1,11 @@
-import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../provider/provider_massage.dart';
-
-import '../../../styles/colors.dart';
 import '../../provider/provider_setting.dart';
 
 class AddMassage_Screen extends StatefulWidget {
-  AddMassage_Screen({Key? key}) : super(key: key);
+
   static const String routeName = "AddMassage_Screen";
 
   @override
@@ -24,7 +22,7 @@ class _AddMassage_ScreenState extends State<AddMassage_Screen> {
     var setting = Provider.of<SettingProvider>(context);
     var formkey=GlobalKey<FormState>();
     return  Padding(
-        padding: const EdgeInsets.all(2.0),
+        padding: const EdgeInsets.all(10.0),
         child: Form(
           key: formkey,
           child: SingleChildScrollView(
@@ -32,6 +30,7 @@ class _AddMassage_ScreenState extends State<AddMassage_Screen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 TextFormField(
+                  autofocus: true,
                   maxLength: 30,
                   textDirection: TextDirection.rtl,
                   controller: titleController,

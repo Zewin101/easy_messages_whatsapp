@@ -103,7 +103,7 @@ late int? id=sharedPreferences.getInt('id');
       {required String title, required String massage, required int id}) async {
     await database?.rawUpdate(
         'UPDATE $tableName SET title = ?, massage = ? WHERE id = ?',
-        ['updated name', '9876', '$id']).then((value) {
+        [ title, massage , '$id']).then((value) {
       print("$value update successfully");
       readDatabase(database);
     }).catchError((onError) {
