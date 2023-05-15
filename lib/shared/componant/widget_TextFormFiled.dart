@@ -33,6 +33,7 @@ class My_TextFormFiled extends StatelessWidget {
     var setting = Provider.of<SettingProvider>(context);
     return TextFormField(
       // autofocus: true,
+
       maxLines: maxLines,
       initialValue: initialValue,
       validator: validator,
@@ -44,6 +45,8 @@ class My_TextFormFiled extends StatelessWidget {
       controller: controller,
       textDirection: TxtDecoration ? TextDirection.rtl : TextDirection.ltr,
       decoration: InputDecoration(
+        filled: true,
+        fillColor:setting.colorSystem[setting.colorNumber].withOpacity(0.2),
         hintText: hintText,
         hintStyle: TextStyle(
           color: MASTERCOLOR2,

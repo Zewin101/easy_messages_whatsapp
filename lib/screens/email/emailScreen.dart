@@ -5,26 +5,39 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/provider_massage.dart';
+import '../../provider/provider_setting.dart';
 import '../../provider/provider_whatsapp.dart';
 import '../../styles/colors.dart';
 
 class email_screen extends StatelessWidget {
   email_screen({Key? key}) : super(key: key);
   static const String routeName = 'email_screen';
+  // var numberController = TextEditingController();
+  // var formKey = GlobalKey<FormState>();
+   var emailController = TextEditingController();
+  // var subjectController = TextEditingController();
+  // var txtEmailController = TextEditingController();
+  // var provider;
+  // var providerMassage;
   var numberController = TextEditingController();
+  var MessageController = TextEditingController();
+  var titleController = TextEditingController();
   var formKey = GlobalKey<FormState>();
-  var emailController = TextEditingController();
-  var subjectController = TextEditingController();
-  var txtEmailController = TextEditingController();
-  var provider;
-  var providerMassage;
+
+  late WhatsappProvider provider;
+  late MessageProvider providerMassage;
 
   @override
   Widget build(BuildContext context) {
+    // provider = Provider.of<WhatsappProvider>(context);
+    // providerMassage = Provider.of<MessageProvider>(context);
+    // subjectController.text = providerMassage.massageMaster[0]['title'];
+    // txtEmailController.text = providerMassage.massageMaster[0]['massage'];
     provider = Provider.of<WhatsappProvider>(context);
     providerMassage = Provider.of<MessageProvider>(context);
-    subjectController.text = providerMassage.massageMaster[0]['title'];
-    txtEmailController.text = providerMassage.massageMaster[0]['massage'];
+    var setting = Provider.of<SettingProvider>(context);
+    MessageController.text = providerMassage.messageApp;
+    titleController.text=providerMassage.titleMessageApp;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Form(
@@ -47,7 +60,7 @@ class email_screen extends StatelessWidget {
                   hintText: 'ادخل الايميل',
                   validator: (value) {
                     if (value?.trim() == '' || value!.isEmpty) {
-                      return 'لم تقم بكتابة الرقم ';
+                      return 'لم تقم بكتابة الايميل ';
                     }
                     if (numberController.text.length < 10) {
                       final bool emailValid = RegExp(
@@ -66,7 +79,7 @@ class email_screen extends StatelessWidget {
                 My_TextFormFiled(
                   length: 20,
                   icon: Icons.title,
-                  controller: subjectController,
+                  controller: titleController,
                   hintText: 'عنوان الرسالة     ',
                   validator: (value) {
                     if (value?.trim() == '' || value!.isEmpty) {
@@ -79,10 +92,11 @@ class email_screen extends StatelessWidget {
                   height: 15,
                 ),
                 My_TextFormFiled(
-                  icon: Icons.text_snippet_rounded,
+                  icon: Icons.alternate_email,
                   maxLines: 8,
                   length: 50,
-                  controller: txtEmailController,
+
+                  controller: MessageController,
                   hintText: 'نص الرسالة',
                   validator: (value) {
                     if (value?.trim() == '' || value!.isEmpty) {
@@ -112,9 +126,21 @@ class email_screen extends StatelessWidget {
    sendEmail() async {
     if (formKey.currentState!.validate()) {
       await provider.launchUrlEmail(
-          massage: txtEmailController.text,
-          title: subjectController.text,
+          massage: MessageController.text,
+          title: MessageController.text,
           email: emailController.text);
+      if (providerMassage.allMassage.isEmpty ||
+          providerMassage.allMassage.length == 0) {
+        providerMassage.insertDatabase(
+            title: titleController.text, massage: MessageController.text);
+      } else if(providerMassage.allMassage.length > 0) {
+        providerMassage.updateDatabase(
+            title: titleController.text,
+            massage: MessageController.text,
+            id: providerMassage.id + 1);
+        providerMassage.messageApp = MessageController.text;
+        providerMassage.titleMessageApp = titleController.text;
+      }
     }
   }
 }

@@ -6,7 +6,8 @@ const Color MASTERCOLORTOW = Color.fromRGBO(34, 124, 112, 1.0);
 const Color MASTERCOLORTHREE = Color.fromRGBO(115, 169, 173, 1.0);
 
 
-const Color MASTERNAV = Color.fromRGBO(252, 115, 0, 1.0);
+const Color MASTERNAV = Color.fromRGBO(255, 187, 59, 1.0);
+const Color MASTERDRAWER = Color.fromRGBO(253, 247, 195, 1.0);
 
 
 const Color MASTERCARD3 = Color.fromRGBO(130, 150, 99, 1.0);
@@ -17,7 +18,7 @@ const Color CATCOLOR1 = Color.fromRGBO(106, 68, 129, 1.0);
 const Color CATCOLOR2 = Color.fromRGBO(58, 119, 15, 1.0);
 const Color CATCOLOR3 = Color.fromRGBO(105, 166, 150, 1.0);
 const Color CATCOLOR4 = Color.fromRGBO(10, 150, 237, 1.0);
-const Color CATCOLOR5 = Color.fromRGBO(182, 73, 14, 1.0);
+const Color CATCOLOR5 = Color.fromRGBO(161, 123, 58, 1.0);
 const Color CATCOLOR6 = Color.fromRGBO(13, 38, 166, 1.0);
 const Color CATCOLOR7 = Color.fromRGBO(196, 191, 107, 1.0);
 const Color CATCOLOR8 = Color.fromRGBO(108, 197, 124, 1.0);

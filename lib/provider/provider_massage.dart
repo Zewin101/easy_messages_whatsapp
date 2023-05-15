@@ -19,7 +19,7 @@ class MessageProvider extends ChangeNotifier {
           ' السلام عليكم ورحمة الله وبركات'
     }
   ];
-  late int? id = sharedPreferences.getInt('id');
+   int id = sharedPreferences.getInt('id')??0;
   String titleMessageApp =
       "${sharedPreferences.getString('MasterTitle') ?? "رسالة"} ";
   String messageApp =

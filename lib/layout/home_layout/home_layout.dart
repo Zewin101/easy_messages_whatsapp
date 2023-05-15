@@ -1,4 +1,5 @@
 import 'package:easy_whats/generated/assets.dart';
+import 'package:easy_whats/layout/home_layout/drawer_screen.dart';
 import 'package:easy_whats/provider/provider_setting.dart';
 import 'package:easy_whats/styles/colors.dart';
 import 'package:flutter/material.dart';
@@ -60,108 +61,13 @@ class HomeLayout extends StatelessWidget {
                           backgroundColor:
                               setting.colorSystem[setting.colorNumber]),
                       BottomNavigationBarItem(
-                          icon: Icon(Icons.settings),
+                          icon: Icon(Icons.save_as),
                           label: 'المحفوظات',
                           backgroundColor:
                               setting.colorSystem[setting.colorNumber]),
                     ]),
                 body: providerMassage.screen[providerMassage.currentIndex],
-                drawer: Drawer(
-                  backgroundColor: setting.colorSystem[setting.colorNumber],
-                  width: MediaQuery.of(context).size.width * 0.5,
-                  child: Scaffold(
-                    appBar: AppBar(
-                      backgroundColor: setting.colorSystem[setting.colorNumber],
-                      centerTitle: true,
-                      title: Text(
-                        'easy message',
-                        style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.05,
-                        ),
-                      ),
-                    ),
-                    backgroundColor: setting.colorSystem[setting.colorNumber],
-                    body: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  color: setting.colorSystem[
-                                              setting.colorNumber] ==
-                                          setting.colorSystem[0]
-                                      ? Colors.cyanAccent
-                                      : setting
-                                          .colorSystem[setting.colorNumber],
-                                ),
-                                child: CircleAvatar(
-                                  child: Text('1'),
-                                  backgroundColor: MASTERCOLOR,
-                                ),
-                              ),
-                              onTap: () {
-                                setting.systemColorChange(0);
-                                sharedPreferences.setInt('colorSystemIndex', 0);
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  color: setting.colorSystem[
-                                              setting.colorNumber] ==
-                                          setting.colorSystem[1]
-                                      ? Colors.cyanAccent
-                                      : setting
-                                          .colorSystem[setting.colorNumber],
-                                ),
-                                child: CircleAvatar(
-                                  child: Text('2'),
-                                  backgroundColor: MASTERCOLORTOW,
-                                ),
-                              ),
-                              onTap: () {
-                                setting.systemColorChange(1);
-                                sharedPreferences.setInt('colorSystemIndex', 1);
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  color: setting.colorSystem[
-                                              setting.colorNumber] ==
-                                          setting.colorSystem[2]
-                                      ? Colors.cyanAccent
-                                      : setting
-                                          .colorSystem[setting.colorNumber],
-                                ),
-                                child: CircleAvatar(
-                                  child: Text('3'),
-                                  backgroundColor: MASTERCOLORTHREE,
-                                ),
-                              ),
-                              onTap: () {
-                                setting.systemColorChange(2);
-                                sharedPreferences.setInt('colorSystemIndex', 2);
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                drawer: Drawer_Screen(),
               ),
             ],
           );

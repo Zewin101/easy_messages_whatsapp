@@ -14,8 +14,9 @@ class WhatsappScreen extends StatelessWidget {
 
   var numberController = TextEditingController();
   var MessageController = TextEditingController();
-  var formKey = GlobalKey<FormState>();
   var titleController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
+
   late WhatsappProvider provider;
   late MessageProvider providerMassage;
 
@@ -46,6 +47,7 @@ class WhatsappScreen extends StatelessWidget {
                     length: 500,
                     controller: MessageController,
                     hintText: '',
+                    icon: Icons.whatsapp,
                     maxLines: 10),
                 const SizedBox(
                   height: 15,
@@ -91,11 +93,12 @@ class WhatsappScreen extends StatelessWidget {
           providerMassage.allMassage.length == 0) {
         providerMassage.insertDatabase(
             title: titleController.text, massage: MessageController.text);
-      } else {
+        providerMassage.id=0;
+      } else if(providerMassage.allMassage.length > 0) {
         providerMassage.updateDatabase(
             title: titleController.text,
             massage: MessageController.text,
-            id: providerMassage.id! + 1);
+            id: providerMassage.id + 1);
         providerMassage.messageApp = MessageController.text;
         providerMassage.titleMessageApp = titleController.text;
         // sharedPreferences.setString('MasterMessage',MessageController.text);
@@ -107,5 +110,4 @@ class WhatsappScreen extends StatelessWidget {
 
 
 ///    'title': sharedPreferences.getString('MasterTitle') ?? ' الرئيسية',
-//       'massage': sharedPreferences.getString('MasterMessage') ??
-//           ' السلام عليكم ورحمة الله وبركات'
+///    'massage': sharedPreferences.getString('MasterMessage') ??

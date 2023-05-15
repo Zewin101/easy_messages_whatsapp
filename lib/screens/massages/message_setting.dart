@@ -36,7 +36,7 @@ class MessageScreen extends StatelessWidget {
         ),
         onPressed: () {
           showModalBottomSheet(
-            isScrollControlled: true,
+              isScrollControlled: true,
               context: context,
               builder: (context) {
                 return Padding(
@@ -57,17 +57,16 @@ class MessageScreen extends StatelessWidget {
                     "لا يوجد رسائل محفوظة ",
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
-                  Icon(Icons.sledding)
+                  Icon(Icons.do_not_disturb_on_outlined),
                 ],
               ),
             )
           : ListView.builder(
-        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               itemCount: providerMessage.allMassage.length,
               itemBuilder: (context, index) {
                 return CardDetails(
                   DELETE: (context) async {
-
                     await deleteData(index);
                     await providerMessage.chackAllMassage(index);
                   },
@@ -84,7 +83,7 @@ class MessageScreen extends StatelessWidget {
                           'لارسال الرسالة الي رقم اضغط ارسال لجعل الرسالة الرسالة الرئيسية اضغط الرئيسية',
                       btnCancelOnPress: () async {
                         await providerMessage.changeMessageInAllApp(index);
-                        providerMessage.id=index;
+                        providerMessage.id = index;
                         print('index------.$index');
                         sharedPreferences.setInt('id', index);
                         print(providerMessage.messageApp);
@@ -93,30 +92,67 @@ class MessageScreen extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (context) {
-                            return AlertDialog(
-                              title: Text(
-                                'تريد ارسال رسالة \n${providerMessage.allMassage[index]['title']}',
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.subtitle1,
-                              ),
-                              content: My_TextFormFiled(
+                            return SingleChildScrollView(
+                              child: AlertDialog(
+                                title: Text(
+                                  'تريد ارسال رسالة \n${providerMessage.allMassage[index]['title']}\n '
+                                      '${providerMessage.allMassage[index]['massage']}',
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.subtitle1,
+                                ),
+                                content: My_TextFormFiled(
                                   length: 13,
                                   controller: numberPhone,
-                                  hintText: 'رقم الجوال'),
-                              actions: [
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: My_ElevatedButton(
-                                      onPressed: () async {
-                                        await sendMassage.launchUrlWhatsapp(
-                                            numPhone: numberPhone.text,
-                                            messageWhats: providerMessage
-                                                .allMassage[index]['massage']);
-                                      },
-                                      title: 'send',
-                                      icon: Icons.send),
-                                )
-                              ],
+                                  hintText: 'رقم الجوال',
+                                  icon: Icons.phone_in_talk,
+                                  keyboardType: TextInputType.number,
+                                ),
+                                actions: [
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: Column(
+                                      children: [
+                                        My_ElevatedButton(
+                                            onPressed: () async {
+                                              await sendMassage.launchUrlWhatsapp(
+                                                  numPhone: numberPhone.text,
+                                                  messageWhats: providerMessage
+                                                          .allMassage[index]
+                                                      ['massage']);
+                                            },
+                                            title: 'send whatsapp',
+                                            icon: Icons.send),
+                                        My_ElevatedButton(
+                                            onPressed: () async {
+                                              await sendMassage.launchUrlWhatsapp(
+                                                  numPhone: numberPhone.text,
+                                                  messageWhats: providerMessage
+                                                          .allMassage[index]
+                                                      ['massage']);
+                                            },
+                                            title: 'send sms',
+                                            icon: Icons.send),
+                                        My_ElevatedButton(
+                                            onPressed: () async {
+                                              await sendMassage.launchUrlWhatsapp(
+                                                  numPhone: numberPhone.text,
+                                                  messageWhats: providerMessage
+                                                          .allMassage[index]
+                                                      ['massage']);
+                                            },
+                                            title: 'send email',
+                                            icon: Icons.send),
+                                        My_ElevatedButton(
+                                            onPressed: () async {
+                                             Navigator.pop(context);
+                                            },
+                                            title: 'close',
+                                            icon: Icons.close),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             );
                           },
                         );
@@ -136,7 +172,7 @@ class MessageScreen extends StatelessWidget {
       context: context,
       builder: (context) {
         print('ddddddddddddddddddddddddddd-------------->$index');
-       return  Padding(
+        return Padding(
           padding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: UpdateMassage_Screen(

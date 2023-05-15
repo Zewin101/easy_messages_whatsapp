@@ -13,19 +13,21 @@ class sms_screen extends StatelessWidget {
   sms_screen({Key? key}) : super(key: key);
   static const String routeName = 'sms_screen';
   var numberController = TextEditingController();
-  var backMessageController = TextEditingController();
+  var MessageController = TextEditingController();
+  var titleController = TextEditingController();
   var formKey = GlobalKey<FormState>();
-  var controller = TextEditingController();
-  var providerMassage;
-  var provider;
-  var setting;
+
+  late WhatsappProvider provider;
+  late MessageProvider providerMassage;
 
   @override
   Widget build(BuildContext context) {
     provider = Provider.of<WhatsappProvider>(context);
     providerMassage = Provider.of<MessageProvider>(context);
-    setting = Provider.of<SettingProvider>(context);
-    backMessageController.text = providerMassage.messageApp;
+    var setting = Provider.of<SettingProvider>(context);
+    MessageController.text = providerMassage.messageApp;
+    titleController.text=providerMassage.titleMessageApp;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Form(
@@ -37,9 +39,17 @@ class sms_screen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 My_TextFormFiled(
+                    length: 20,
+                    controller: titleController,
+                    hintText: 'عنوان الرسالة'),
+                const SizedBox(
+                  height: 5,
+                ),
+                My_TextFormFiled(
                     length: 500,
-                    controller: backMessageController,
+                    controller: MessageController,
                     hintText: '',
+                    icon: Icons.sms,
                     maxLines: 10),
                 const SizedBox(
                   height: 15,
@@ -79,7 +89,19 @@ class sms_screen extends StatelessWidget {
     if (formKey.currentState!.validate()) {
       await provider.launchUrlSms(
           numPhone: numberController.text,
-          messageSms: providerMassage.massageMaster[0]['massage']);
+          messageSms: MessageController.text);
+      if (providerMassage.allMassage.isEmpty ||
+          providerMassage.allMassage.length == 0) {
+        providerMassage.insertDatabase(
+            title: titleController.text, massage: MessageController.text);
+      } else if(providerMassage.allMassage.length > 0) {
+        providerMassage.updateDatabase(
+            title: titleController.text,
+            massage: MessageController.text,
+            id: providerMassage.id + 1);
+        providerMassage.messageApp = MessageController.text;
+        providerMassage.titleMessageApp = titleController.text;
+      }
     }
   }
 }
