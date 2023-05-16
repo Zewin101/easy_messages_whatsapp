@@ -65,7 +65,7 @@ class AddMassage_Screen extends StatelessWidget {
                         massage: massageController.text);
                     Navigator.pop(context);
                   },
-                  title: "Save",
+                  title: "حفظ",
                   icon: Icons.save),
             ],
           ),

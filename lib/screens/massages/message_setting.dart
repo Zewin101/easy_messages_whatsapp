@@ -153,22 +153,29 @@ class _MessageScreenState extends State<MessageScreen> {
                             ));
                   },
                   EDIT: (context) async {
-                    if (setting.isBottomSheetShow) {
+                    if (isBottomSheetShow) {
+                      isBottomSheetShow = false;
+                      print(isBottomSheetShow);
                       Navigator.pop(context);
+                      setState(() {});
                     } else {
-                      setting.iconBottomSheetChange();
+                      isBottomSheetShow = true;
+                      print(isBottomSheetShow);
                       scaffoldKey.currentState!
-                          .showBottomSheet((context) {
-                            return Container(
-                                color: Colors.transparent,
-                                child: UpdateMassage_Screen(
-                                  index: index,
-                                ));
-                          })
+                          .showBottomSheet(
+                            (context) {
+                          return Container(
+                              color: Colors.transparent, child: UpdateMassage_Screen(index: index,));
+                        },
+                        elevation: 30,
+                      )
                           .closed
                           .then((value) {
-                            setting.iconBottomSheetChange();
-                          });
+                        print('vvvv $value');
+                        isBottomSheetShow = false;
+                        setState(() {});
+                      });
+                      setState(() {});
                     }
                     ;
                   },

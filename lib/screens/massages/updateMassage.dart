@@ -52,6 +52,7 @@ class _UpdateMassage_ScreenState extends State<UpdateMassage_Screen> {
               ),
               My_TextFormFiled(
                 length: 1000,
+                maxLines: 10,
                 controller: massageController,
                 hintText: "          نص الرسالة",
                 TxtDecoration: true,

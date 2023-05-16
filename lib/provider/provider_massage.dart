@@ -21,7 +21,7 @@ class MessageProvider extends ChangeNotifier {
   ];
    int id = sharedPreferences.getInt('id')??0;
   String titleMessageApp =
-      "${sharedPreferences.getString('MasterTitle') ?? "رسالة"} ";
+      "${sharedPreferences.getString('MasterTitle') ?? "موضوع الرسالة"} ";
   String messageApp =
       "${sharedPreferences.getString('MasterMessage') ?? "السلام عليكم ورحمة الله وبركاته"}";
 

@@ -36,9 +36,9 @@ var providerMassage=Provider.of<MessageProvider>(context);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: HomeLayout.routeName,
+      initialRoute: SplashPage.routeName,
       routes: {
-        SplashScreen.routeName: (context) => SplashScreen(),
+        SplashPage.routeName: (context) => SplashPage(),
         HomeLayout.routeName: (context) => HomeLayout(),
         AddMassage_Screen.routeName: (context) => AddMassage_Screen(),
         MessageScreen.routeName: (context) => MessageScreen(),

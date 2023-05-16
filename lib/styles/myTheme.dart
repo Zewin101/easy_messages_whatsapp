@@ -26,7 +26,7 @@ class MyThemeData {
         headline1: TextStyle(
           color: Colors.white,
           fontSize: 20,
-       
+
         ),
         headline2: TextStyle(
           color: Colors.white,
@@ -37,11 +37,13 @@ class MyThemeData {
           color: MASTERCOLOR,
           fontSize: 20,
           fontWeight: FontWeight.bold,
+          fontFamily: "Amiri",
         ),
         subtitle2: TextStyle(
           color: MASTERCOLOR3,
           fontSize: 20,
           fontWeight: FontWeight.bold,
+
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
