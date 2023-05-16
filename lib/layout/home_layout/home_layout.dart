@@ -23,13 +23,13 @@ class HomeLayout extends StatelessWidget {
     return Stack(
             children: [
               Image.asset(
-                Assets.imageBack1,
+                Assets.imageBack,
                 fit: BoxFit.fill,
                 width: double.infinity,
                 height: double.infinity,
               ),
               Scaffold(
-                backgroundColor: Colors.transparent,
+                backgroundColor: START,
                 appBar: AppBar(
                   actions: [
                     setting.icons[providerMassage.currentIndex],

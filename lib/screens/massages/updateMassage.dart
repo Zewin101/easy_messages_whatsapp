@@ -1,4 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_whats/shared/componant/widget_ElevatedButton.dart';
+import 'package:easy_whats/shared/componant/widget_TextFormFiled.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../provider/provider_massage.dart';
@@ -37,89 +39,39 @@ class _UpdateMassage_ScreenState extends State<UpdateMassage_Screen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TextFormField(
-                autofocus:true ,
-                maxLength: 30,
-                textDirection: TextDirection.rtl,
+              My_TextFormFiled(
+                length: 30,
                 controller: titleController,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-                decoration: InputDecoration(
-                  labelText: "         عنوان الرسالة",
-                  labelStyle: Theme.of(context).textTheme.subtitle1,
-                  prefixIcon: Icon(Icons.text_snippet_outlined),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      color: setting.colorSystem[setting.colorNumber],
-                      width: 2,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      color: setting.colorSystem[setting.colorNumber],
-                      width: 2,
-                    ),
-                  ),
-                ),
-                textInputAction:TextInputAction.next ,
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              TextFormField(
-                maxLength: 1000,
-                textInputAction:TextInputAction.next ,
-                textDirection: TextDirection.rtl,
-                controller: massageController,
-                maxLines: 10,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-                decoration: InputDecoration(
-                  labelText: "          نص الرسالة",
-                  prefixIcon: Icon(Icons.text_snippet_outlined),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      color: setting.colorSystem[setting.colorNumber],
-                      width: 2,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      color: setting.colorSystem[setting.colorNumber],
-                      width: 2,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          setting.colorSystem[setting.colorNumber]),
-                  onPressed: () {
-                  if(formkey.currentState!.validate()){
-                    providerMessage.updateDatabase(
-                        title: titleController.text,
-                        massage: massageController.text,
-                        id: providerMessage.allMassage[widget.index]['id']);
-                    Navigator.pop(context);
-                  }
+                hintText: "         عنوان الرسالة",
+                TxtDecoration: true,
 
+              ),
+
+              const SizedBox(
+                height: 5,
+              ),
+              My_TextFormFiled(
+                length: 1000,
+                controller: massageController,
+                hintText: "          نص الرسالة",
+                TxtDecoration: true,
+              ),
+
+              const SizedBox(
+                height: 5,
+              ),
+              My_ElevatedButton(
+                  onPressed: () async {
+                    if (formkey.currentState!.validate()) {
+                      await providerMessage.updateDatabase(
+                          title: titleController.text,
+                          massage: massageController.text,
+                          id: providerMessage.allMassage[widget.index]['id']);
+                      Navigator.pop(context);
+                    }
                   },
-                  child: Text(
-                    "تعديل",
-                    style: Theme.of(context).textTheme.headline1,
-                  )),
+                  title: "تعديل",
+                  icon: Icons.edit),
             ],
           ),
         ),

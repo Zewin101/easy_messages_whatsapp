@@ -13,7 +13,15 @@ class MyThemeData {
           ),
         ),
       ),
+      bottomSheetTheme: BottomSheetThemeData(
+           // backgroundColor: Colors.red.withOpacity(.5),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(25),
+          )
+        )
 
+        ),
       textTheme: const TextTheme(
         headline1: TextStyle(
           color: Colors.white,

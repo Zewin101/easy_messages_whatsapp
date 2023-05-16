@@ -49,7 +49,7 @@ class sms_screen extends StatelessWidget {
                     length: 500,
                     controller: MessageController,
                     hintText: '',
-                    icon: Icons.sms,
+                    icon: Icons.sms_outlined,
                     maxLines: 10),
                 const SizedBox(
                   height: 15,
@@ -76,7 +76,7 @@ class sms_screen extends StatelessWidget {
                       await sendMessage();
                     },
                     title: "SMS",
-                    icon: Icons.sms),
+                    icon: Icons.sms_outlined),
               ],
             ),
           ),

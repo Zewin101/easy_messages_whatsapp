@@ -15,8 +15,17 @@ List<Color> cardColor=[
   MASTERCARD2,
   MASTERCARD3,
 ];
+ Future allTimeFalseBottomSheet()async{
+   isBottomSheetShow =false;
+  notifyListeners();
+}
 
-
+   bool isBottomSheetShow =false;
+  iconBottomSheetChange()async{
+     isBottomSheetShow =! isBottomSheetShow ;
+   print(isBottomSheetShow);
+  notifyListeners();
+}
 
 
 

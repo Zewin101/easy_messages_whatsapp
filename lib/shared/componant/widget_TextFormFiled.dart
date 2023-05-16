@@ -15,6 +15,8 @@ class My_TextFormFiled extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool TxtDecoration;
   final bool enable;
+  final bool autofocus;
+
 
   const My_TextFormFiled(
       {required this.length,
@@ -26,14 +28,15 @@ class My_TextFormFiled extends StatelessWidget {
       this.icon,
       this.maxLines,
       this.enable = true,
+      this.autofocus = false,
       this.initialValue});
 
   @override
   Widget build(BuildContext context) {
     var setting = Provider.of<SettingProvider>(context);
     return TextFormField(
-      // autofocus: true,
 
+      autofocus: autofocus,
       maxLines: maxLines,
       initialValue: initialValue,
       validator: validator,
@@ -46,7 +49,8 @@ class My_TextFormFiled extends StatelessWidget {
       textDirection: TxtDecoration ? TextDirection.rtl : TextDirection.ltr,
       decoration: InputDecoration(
         filled: true,
-        fillColor:setting.colorSystem[setting.colorNumber].withOpacity(0.2),
+        fillColor:Colors.white70,
+        // setting.colorSystem[setting.colorNumber].withOpacity(0.2)
         hintText: hintText,
         hintStyle: TextStyle(
           color: MASTERCOLOR2,

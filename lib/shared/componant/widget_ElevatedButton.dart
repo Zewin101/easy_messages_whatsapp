@@ -11,15 +11,15 @@ class My_ElevatedButton extends StatelessWidget {
   String title;
   IconData? icon;
 
-  My_ElevatedButton({required this.onPressed, required this.title,required this.icon});
+
+  My_ElevatedButton({required this.onPressed, required this.title, this.icon});
 
   @override
   Widget build(BuildContext context) {
     var setting = Provider.of<SettingProvider>(context);
     return  Padding(
       padding: const EdgeInsets.only(
-        left: 16,
-        right: 16,
+
         top: 8,
       ),
       child: Container(
@@ -27,6 +27,8 @@ class My_ElevatedButton extends StatelessWidget {
         height: MediaQuery.of(context).size.height*0.06,
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
+              elevation: 1,
+              shadowColor:setting.cardColor[setting.colorNumber] ,
               backgroundColor: setting.colorSystem[setting.colorNumber],
             ),
             onPressed: onPressed,

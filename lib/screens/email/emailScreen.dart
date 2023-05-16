@@ -12,13 +12,9 @@ import '../../styles/colors.dart';
 class email_screen extends StatelessWidget {
   email_screen({Key? key}) : super(key: key);
   static const String routeName = 'email_screen';
-  // var numberController = TextEditingController();
-  // var formKey = GlobalKey<FormState>();
+
    var emailController = TextEditingController();
-  // var subjectController = TextEditingController();
-  // var txtEmailController = TextEditingController();
-  // var provider;
-  // var providerMassage;
+
   var numberController = TextEditingController();
   var MessageController = TextEditingController();
   var titleController = TextEditingController();
@@ -26,18 +22,15 @@ class email_screen extends StatelessWidget {
 
   late WhatsappProvider provider;
   late MessageProvider providerMassage;
-
+var setting;
   @override
   Widget build(BuildContext context) {
-    // provider = Provider.of<WhatsappProvider>(context);
-    // providerMassage = Provider.of<MessageProvider>(context);
-    // subjectController.text = providerMassage.massageMaster[0]['title'];
-    // txtEmailController.text = providerMassage.massageMaster[0]['massage'];
     provider = Provider.of<WhatsappProvider>(context);
     providerMassage = Provider.of<MessageProvider>(context);
-    var setting = Provider.of<SettingProvider>(context);
+    setting = Provider.of<SettingProvider>(context);
     MessageController.text = providerMassage.messageApp;
     titleController.text=providerMassage.titleMessageApp;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Form(
@@ -53,7 +46,7 @@ class email_screen extends StatelessWidget {
                 ),
                 My_TextFormFiled(
                   TxtDecoration: false,
-                  icon: Icons.email,
+                  icon: Icons.email_outlined,
                   keyboardType: TextInputType.emailAddress,
                   length: 50,
                   controller: emailController,
@@ -121,6 +114,8 @@ class email_screen extends StatelessWidget {
         ),
       ),
     );
+
+
   }
 
    sendEmail() async {

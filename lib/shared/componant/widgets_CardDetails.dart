@@ -24,6 +24,7 @@ class CardDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     var setting=Provider.of<SettingProvider>(context);
     return Container(
+
       margin: EdgeInsets.only(left: 5,right: 10,top: 5),
       child: Slidable(
         startActionPane: ActionPane(
@@ -51,6 +52,7 @@ class CardDetails extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           child: Card(
+
             color: setting.cardColor[setting.colorNumber],
             elevation: 40,
             shadowColor: setting.cardColor[setting.colorNumber],
